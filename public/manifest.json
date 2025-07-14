@@ -1,0 +1,42 @@
+{
+  "name": "Job Board - Find Your Dream Job",
+  "short_name": "JobBoard",
+  "description": "Modern job board with 10K+ active jobs across multiple industries",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/pwa-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/pwa-512x512.png", 
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "productivity"],
+  "shortcuts": [
+    {
+      "name": "Search Jobs",
+      "short_name": "Search",
+      "description": "Search for job opportunities",
+      "url": "/search",
+      "icons": [{ "src": "/pwa-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Latest Jobs",
+      "short_name": "Latest",
+      "description": "View latest job postings",
+      "url": "/jobs",
+      "icons": [{ "src": "/pwa-192x192.png", "sizes": "192x192" }]
+    }
+  ]
+}
