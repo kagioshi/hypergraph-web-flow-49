@@ -9,6 +9,7 @@ import { CriticalCSS } from "@/components/CriticalCSS";
 import { PerformanceMonitor } from "@/components/PerformanceMonitor";
 import { useThirdPartyScripts } from "@/hooks/useThirdPartyScripts";
 import { useEffect } from "react";
+import "./lib/i18n";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 
