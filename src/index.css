@@ -8,51 +8,55 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
+    /* Neo-Brutalism Base Colors */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 0 0% 0%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 0 0% 0%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 0 0% 0%;
 
-    --primary: 262 83% 58%;
-    --primary-foreground: 0 0% 100%;
+    /* Bold Primary Colors */
+    --primary: 120 100% 50%; /* Electric Green #00FF00 */
+    --primary-foreground: 0 0% 0%;
 
-    --secondary: 45 97% 58%;
-    --secondary-foreground: 222.2 84% 4.9%;
+    --secondary: 330 100% 50%; /* Hot Pink #FF0080 */
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 0 0% 90%;
+    --muted-foreground: 0 0% 0%;
 
-    --accent: 262 73% 48%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 60 100% 50%; /* Bright Yellow #FFFF00 */
+    --accent-foreground: 0 0% 0%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 100% 50%; /* Pure Red */
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 262 83% 58%;
+    /* Neo-Brutalism Borders & Effects */
+    --border: 0 0% 0%; /* Pure Black Borders */
+    --input: 0 0% 0%;
+    --ring: 120 100% 50%;
 
-    --radius: 0.5rem;
+    --radius: 0rem; /* No rounded corners */
 
-    /* Job Board Specific Colors */
-    --hero-gradient-start: 262 83% 58%;
-    --hero-gradient-end: 282 73% 48%;
+    /* Job Board Specific Colors - Neo-Brutalism */
+    --hero-gradient-start: 240 100% 50%; /* Electric Blue */
+    --hero-gradient-end: 240 100% 50%; /* No gradient, solid color */
     --stats-card: 0 0% 100%;
-    --category-card: 0 0% 100%;
-    --job-card: 0 0% 100%;
-    --sidebar-bg: 248 50% 97%;
+    --category-card: 60 100% 50%; /* Yellow cards */
+    --job-card: 330 100% 50%; /* Pink cards */
+    --sidebar-bg: 0 0% 95%;
     
-    /* Shadows */
-    --shadow-card: 0 2px 8px -2px hsl(0 0% 0% / 0.1);
-    --shadow-hover: 0 4px 12px -4px hsl(262 83% 58% / 0.15);
+    /* Harsh Neo-Brutalist Shadows */
+    --shadow-brutal: 8px 8px 0px hsl(0 0% 0%);
+    --shadow-card: 6px 6px 0px hsl(0 0% 0%);
+    --shadow-hover: 12px 12px 0px hsl(0 0% 0%);
     
-    /* Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(var(--hero-gradient-start)), hsl(var(--hero-gradient-end)));
-    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%), hsl(248 50% 99%));
+    /* No Gradients - Solid Colors Only */
+    --gradient-hero: hsl(240 100% 50%);
+    --gradient-card: hsl(0 0% 100%);
 
     --sidebar-background: 0 0% 98%;
 
@@ -72,33 +76,34 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    /* Neo-Brutalism Dark Mode */
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 100%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 100%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 120 100% 50%; /* Electric Green */
+    --primary-foreground: 0 0% 0%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 330 100% 50%; /* Hot Pink */
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 0 0% 20%;
+    --muted-foreground: 0 0% 100%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 60 100% 50%; /* Bright Yellow */
+    --accent-foreground: 0 0% 0%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --border: 0 0% 100%; /* White borders in dark mode */
+    --input: 0 0% 100%;
+    --ring: 120 100% 50%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -121,46 +126,89 @@ All colors MUST be HSL.
 }
 
 @layer components {
-  .hero-gradient {
+  /* Neo-Brutalism Components */
+  .hero-brutal {
     background: var(--gradient-hero);
+    border: 4px solid hsl(var(--border));
+    box-shadow: var(--shadow-brutal);
   }
   
-  .card-shadow {
+  .card-brutal {
+    border: 4px solid hsl(var(--border));
     box-shadow: var(--shadow-card);
+    background: hsl(var(--card));
   }
   
-  .card-hover {
-    transition: all 0.3s ease;
-  }
-  
-  .card-hover:hover {
+  .card-brutal:hover {
     box-shadow: var(--shadow-hover);
-    transform: translateY(-2px);
+    transform: none; /* No smooth transforms */
   }
   
-  .animate-fade-in-up {
-    animation: fadeInUp 0.6s ease-out;
+  .button-brutal {
+    border: 4px solid hsl(var(--border));
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    box-shadow: var(--shadow-card);
+    transition: none; /* No smooth transitions */
   }
   
-  .animate-fade-in-left {
-    animation: fadeInLeft 0.6s ease-out;
+  .button-brutal:hover {
+    box-shadow: var(--shadow-hover);
   }
   
-  .animate-fade-in-right {
-    animation: fadeInRight 0.6s ease-out;
+  .input-brutal {
+    border: 4px solid hsl(var(--border));
+    background: hsl(var(--background));
+    font-weight: 700;
+    box-shadow: inset 4px 4px 0px hsl(0 0% 90%);
   }
   
-  .animate-scale-in {
-    animation: scaleIn 0.4s ease-out;
+  .text-brutal {
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  
+  .shadow-brutal {
+    box-shadow: var(--shadow-brutal);
+  }
+  
+  .border-brutal {
+    border: 4px solid hsl(var(--border));
   }
 }
 
 @layer utilities {
-  .text-gradient {
-    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+  /* No gradients in Neo-Brutalism - use solid colors */
+  .text-brutal-primary {
+    color: hsl(var(--primary));
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+  
+  .text-brutal-secondary {
+    color: hsl(var(--secondary));
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+  
+  .text-brutal-accent {
+    color: hsl(var(--accent));
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+  
+  .bg-brutal-primary {
+    background-color: hsl(var(--primary));
+  }
+  
+  .bg-brutal-secondary {
+    background-color: hsl(var(--secondary));
+  }
+  
+  .bg-brutal-accent {
+    background-color: hsl(var(--accent));
   }
 }
 
