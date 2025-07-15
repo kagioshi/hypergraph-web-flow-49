@@ -8,11 +8,14 @@ const resources = {
       // Header
       jobsite: 'JOBSITE',
       allIndiaGovtJob: 'All India Govt Job',
+      allIndiaGovtJobs: 'All India Govt Jobs',
       stateGovtJobs: 'State Govt Jobs',
       bankJobs: 'Bank Jobs',
       pscJobs: 'PSC Jobs',
       railwayJobs: 'Railway Jobs',
       defenseJobs: 'Defense Jobs',
+      admitCard: 'Admit Card',
+      results: 'Results',
       
       // Hero Section
       findYourDreamJob: 'FIND YOUR DREAM JOB',
@@ -37,12 +40,18 @@ const resources = {
       
       // Jobs
       latestJobOpportunities: 'Latest Job Opportunities',
+      latestJobs: 'Latest Jobs',
+      salaryRange: 'Salary Range',
+      syllabus: 'Syllabus',
       fullTime: 'Full-time',
       partTime: 'Part-time',
       contract: 'Contract',
       remote: 'Remote',
       apply: 'Apply Now',
       viewAllJobs: 'View All Jobs',
+      
+      // Banners
+      startupCredits: 'This website is supported by startup credits and partnerships',
       
       // Sidebar
       filterByState: 'Filter by State',
@@ -64,11 +73,14 @@ const resources = {
       // Header (Hindi)
       jobsite: 'जॉबसाइट',
       allIndiaGovtJob: 'अखिल भारतीय सरकारी नौकरी',
+      allIndiaGovtJobs: 'अखिल भारतीय सरकारी नौकरी',
       stateGovtJobs: 'राज्य सरकारी नौकरियां',
       bankJobs: 'बैंक नौकरियां',
       pscJobs: 'पीएससी नौकरियां',
       railwayJobs: 'रेलवे नौकरियां',
       defenseJobs: 'रक्षा नौकरियां',
+      admitCard: 'प्रवेश पत्र',
+      results: 'परिणाम',
       
       // Hero Section (Hindi)
       findYourDreamJob: 'अपना सपनों का काम खोजें',
@@ -93,12 +105,18 @@ const resources = {
       
       // Jobs (Hindi)
       latestJobOpportunities: 'नवीनतम नौकरी के अवसर',
+      latestJobs: 'नवीनतम नौकरी',
+      salaryRange: 'वेतन सीमा',
+      syllabus: 'पाठ्यक्रम',
       fullTime: 'पूर्णकालिक',
       partTime: 'अंशकालिक',
       contract: 'अनुबंध',
       remote: 'रिमोट',
       apply: 'अभी आवेदन करें',
       viewAllJobs: 'सभी नौकरियां देखें',
+      
+      // Banners (Hindi)
+      startupCredits: 'यह वेबसाइट स्टार्टअप क्रेडिट और साझेदारी द्वारा समर्थित है',
       
       // Sidebar (Hindi)
       filterByState: 'राज्य के अनुसार फ़िल्टर करें',

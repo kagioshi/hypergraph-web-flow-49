@@ -35,10 +35,9 @@ const Index = () => {
   const { isMobile, screenSize } = useDeviceDetection();
 
   const stats = [
-    { label: "Active Jobs", value: "10K+", icon: Briefcase },
-    { label: "Companies", value: "500+", icon: Users },
-    { label: "Success Rate", value: "95%", icon: TrendingUp },
-    { label: "Average Rating", value: "4.8", icon: Star }
+    { label: "Active Jobs", value: "10K+", icon: Briefcase, labelKey: "activeJobs" },
+    { label: "Companies", value: "500+", icon: Users, labelKey: "companies" },
+    { label: "Job Seekers", value: "50K+", icon: TrendingUp, labelKey: "jobSeekers" }
   ];
 
   const categories = [
@@ -101,6 +100,21 @@ const Index = () => {
       <div className="min-h-screen bg-background">
         <Header />
         
+        {/* Navigation Tabs */}
+        <section className="bg-white border-b">
+          <div className="container mx-auto px-4">
+            <div className="flex flex-wrap gap-2 py-4 text-sm">
+              <button className="px-4 py-2 bg-primary text-white rounded-md">{t('allIndiaGovtJobs')}</button>
+              <button className="px-4 py-2 hover:bg-muted rounded-md">{t('stateGovtJobs')}</button>
+              <button className="px-4 py-2 hover:bg-muted rounded-md">{t('bankJobs')}</button>
+              <button className="px-4 py-2 hover:bg-muted rounded-md">{t('railwayJobs')}</button>
+              <button className="px-4 py-2 hover:bg-muted rounded-md">{t('defenseJobs')}</button>
+              <button className="px-4 py-2 hover:bg-muted rounded-md">{t('admitCard')}</button>
+              <button className="px-4 py-2 hover:bg-muted rounded-md">{t('results')}</button>
+            </div>
+          </div>
+        </section>
+
         {/* Hero Section */}
         <section className="hero-gradient relative overflow-hidden py-20">
           <div className="container mx-auto px-4">
@@ -111,10 +125,10 @@ const Index = () => {
               transition={{ duration: 0.6 }}
             >
               <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
-                {t('findYourDreamJob')}
+                FIND YOUR <span className="text-secondary">DREAM JOB</span>
               </h1>
               <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-2xl mx-auto">
-                {t('heroSubtitle')}
+                Discover thousands of opportunities from top companies worldwide
               </p>
               
               {/* Search Bar */}
@@ -138,6 +152,15 @@ const Index = () => {
                 </Button>
               </div>
             </motion.div>
+          </div>
+        </section>
+
+        {/* Startup Credits Banner */}
+        <section className="py-4 bg-secondary/10">
+          <div className="container mx-auto px-4 text-center">
+            <p className="text-sm text-muted-foreground">
+              {t('startupCredits')}
+            </p>
           </div>
         </section>
 
@@ -198,6 +221,17 @@ const Index = () => {
                       </Card>
                     </motion.div>
                   ))}
+                </div>
+              </section>
+
+              {/* Filter Tabs */}
+              <section className="mb-8">
+                <div className="flex flex-wrap gap-2 mb-6">
+                  <button className="px-4 py-2 bg-primary text-white rounded-md text-sm">{t('latestJobs')}</button>
+                  <button className="px-4 py-2 hover:bg-muted rounded-md text-sm">{t('salaryRange')}</button>
+                  <button className="px-4 py-2 hover:bg-muted rounded-md text-sm">{t('admitCard')}</button>
+                  <button className="px-4 py-2 hover:bg-muted rounded-md text-sm">{t('results')}</button>
+                  <button className="px-4 py-2 hover:bg-muted rounded-md text-sm">{t('syllabus')}</button>
                 </div>
               </section>
 

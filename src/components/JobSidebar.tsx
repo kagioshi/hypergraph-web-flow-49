@@ -13,8 +13,35 @@ export const JobSidebar = () => {
   const [isDepartmentsExpanded, setIsDepartmentsExpanded] = useState(true);
 
   const states = [
-    'Delhi', 'Maharashtra', 'Karnataka', 'Tamil Nadu', 'Gujarat', 
-    'West Bengal', 'Rajasthan', 'Uttar Pradesh', 'Telangana', 'Punjab'
+    { name: 'Andhra Pradesh', count: '12' },
+    { name: 'Arunachal Pradesh', count: '8' },
+    { name: 'Assam', count: '24' },
+    { name: 'Bihar', count: '31' },
+    { name: 'Chhattisgarh', count: '15' },
+    { name: 'Delhi', count: '45' },
+    { name: 'Goa', count: '6' },
+    { name: 'Gujarat', count: '38' },
+    { name: 'Haryana', count: '28' },
+    { name: 'Himachal Pradesh', count: '11' },
+    { name: 'Jharkhand', count: '19' },
+    { name: 'Karnataka', count: '42' },
+    { name: 'Kerala', count: '33' },
+    { name: 'Madhya Pradesh', count: '26' },
+    { name: 'Maharashtra', count: '67' },
+    { name: 'Manipur', count: '5' },
+    { name: 'Meghalaya', count: '4' },
+    { name: 'Mizoram', count: '3' },
+    { name: 'Nagaland', count: '7' },
+    { name: 'Odisha', count: '22' },
+    { name: 'Punjab', count: '18' },
+    { name: 'Rajasthan', count: '35' },
+    { name: 'Sikkim', count: '2' },
+    { name: 'Tamil Nadu', count: '48' },
+    { name: 'Telangana', count: '29' },
+    { name: 'Tripura', count: '6' },
+    { name: 'Uttar Pradesh', count: '89' },
+    { name: 'Uttarakhand', count: '14' },
+    { name: 'West Bengal', count: '41' }
   ];
 
   const departments = [
@@ -68,24 +95,31 @@ export const JobSidebar = () => {
                       </label>
                     </div>
                     <Separator />
-                    <div className="max-h-60 overflow-y-auto space-y-2">
-                      {states.map((state, index) => (
-                        <motion.div
-                          key={state}
-                          initial={{ opacity: 0, x: -10 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ duration: 0.2, delay: index * 0.05 }}
-                          className="flex items-center space-x-2"
-                        >
-                          <Checkbox id={`state-${state}`} />
-                          <label 
-                            htmlFor={`state-${state}`} 
-                            className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer hover:text-primary transition-colors"
+                    <div className="max-h-80 overflow-y-auto">
+                      <div className="grid grid-cols-1 gap-2">
+                        {states.map((state, index) => (
+                          <motion.div
+                            key={state.name}
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.2, delay: index * 0.02 }}
+                            className="flex items-center justify-between py-1 px-2 hover:bg-muted/50 rounded-sm cursor-pointer transition-colors"
                           >
-                            {state}
-                          </label>
-                        </motion.div>
-                      ))}
+                            <div className="flex items-center space-x-2">
+                              <Checkbox id={`state-${state.name}`} />
+                              <label 
+                                htmlFor={`state-${state.name}`} 
+                                className="text-sm leading-none cursor-pointer hover:text-primary transition-colors"
+                              >
+                                {state.name}
+                              </label>
+                            </div>
+                            <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full">
+                              {state.count}
+                            </span>
+                          </motion.div>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </CardContent>
