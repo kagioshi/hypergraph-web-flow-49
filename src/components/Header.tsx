@@ -1,9 +1,9 @@
+
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Menu, X, Globe } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
 
 export const Header = () => {
   const { t, i18n } = useTranslation();
@@ -24,106 +24,99 @@ export const Header = () => {
   };
 
   return (
-    <header className="bg-background border-b border-border sticky top-0 z-50 backdrop-blur-sm bg-background/95">
+    <header className="bg-background border-b-brutal border-black sticky top-0 z-50 bg-white">
       <div className="container mx-auto px-4">
         {/* Top Bar */}
-        <div className="flex items-center justify-between h-16">
-          <motion.div 
-            className="flex items-center gap-4"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <h1 className="text-2xl font-bold text-gradient">
-              {t('jobsite')}
-            </h1>
-            <Badge variant="secondary" className="hidden sm:block">
+        <div className="flex items-center justify-between h-16 border-b-brutal border-black">
+          <div className="flex items-center gap-4">
+            <div className="bg-brutal-primary border-brutal shadow-card px-4 py-2">
+              <h1 className="text-xl font-black text-black uppercase tracking-wider">
+                {t('jobsite')}
+              </h1>
+            </div>
+            <Badge variant="secondary" className="hidden sm:block bg-brutal-accent text-black border-brutal font-black uppercase">
               BETA
             </Badge>
-          </motion.div>
+          </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
             <Button
-              variant="ghost"
+              variant="brutal"
               size="sm"
               onClick={toggleLanguage}
-              className="hidden sm:flex items-center gap-2"
+              className="hidden sm:flex items-center gap-2 bg-brutal-secondary text-black"
             >
               <Globe className="h-4 w-4" />
-              {i18n.language === 'en' ? 'हिं' : 'EN'}
+              <span className="font-black uppercase">{i18n.language === 'en' ? 'हिं' : 'EN'}</span>
             </Button>
 
             <Button
-              variant="ghost"
+              variant="brutal"
               size="sm"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden"
+              className="md:hidden bg-brutal-accent text-black"
             >
               {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
           </div>
         </div>
 
-        {/* Navigation */}
-        <nav className="hidden md:block border-t border-border">
-          <div className="flex items-center justify-center py-3">
-            <div className="flex items-center gap-1 flex-wrap justify-center">
+        {/* Navigation - Brutal Style */}
+        <nav className="hidden md:block">
+          <div className="flex items-center py-2 overflow-x-auto">
+            <div className="flex items-center gap-1 min-w-max">
               {navigationItems.map((item, index) => (
-                <motion.div
+                <div
                   key={item.key}
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
+                  className={`
+                    bg-white border-brutal shadow-card hover:shadow-hover transition-none
+                    ${index % 2 === 0 ? 'transform -rotate-1' : 'transform rotate-1'}
+                  `}
                 >
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="text-sm hover:bg-primary/10 hover:text-primary transition-all duration-200"
+                    className="text-xs font-black uppercase tracking-wide text-black border-none shadow-none hover:bg-brutal-accent px-3 py-2"
                   >
                     {t(item.key)}
                   </Button>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
         </nav>
 
-        {/* Mobile Menu */}
-        <AnimatePresence>
-          {isMobileMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="md:hidden border-t border-border bg-background"
-            >
-              <div className="py-4 space-y-2">
-                {navigationItems.map((item) => (
+        {/* Mobile Menu - Brutal Style */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden border-t-brutal border-black bg-white">
+            <div className="py-4 space-y-2">
+              {navigationItems.map((item) => (
+                <div key={item.key} className="bg-brutal-accent border-brutal shadow-card mx-2">
                   <Button
-                    key={item.key}
                     variant="ghost"
                     size="sm"
-                    className="w-full justify-start text-sm"
+                    className="w-full justify-start text-sm font-black uppercase text-black border-none shadow-none"
                   >
                     {t(item.key)}
                   </Button>
-                ))}
-                <div className="pt-2 border-t border-border">
+                </div>
+              ))}
+              <div className="pt-2 mx-2">
+                <div className="bg-brutal-secondary border-brutal shadow-card">
                   <Button
                     variant="ghost"
                     size="sm"
                     onClick={toggleLanguage}
-                    className="w-full justify-start gap-2"
+                    className="w-full justify-start gap-2 font-black uppercase text-black border-none shadow-none"
                   >
                     <Globe className="h-4 w-4" />
-                    {i18n.language === 'en' ? 'हिंदी' : 'English'}
+                    {i18n.language === 'en' ? 'हिंदी' : 'ENGLISH'}
                   </Button>
                 </div>
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+            </div>
+          </div>
+        )}
       </div>
     </header>
   );
