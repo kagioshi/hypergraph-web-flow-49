@@ -47,6 +47,30 @@ export const AMP = ({ enabled = false, analytics }: AMPProps) => {
       analyticsScript.setAttribute('custom-element', 'amp-analytics');
       analyticsScript.setAttribute('src', 'https://cdn.ampproject.org/v0/amp-analytics-0.1.js');
       document.head.appendChild(analyticsScript);
+
+      // Create AMP analytics element
+      if (analytics.googleAnalytics) {
+        const ampAnalytics = document.createElement('amp-analytics');
+        ampAnalytics.setAttribute('type', 'googleanalytics');
+        ampAnalytics.setAttribute('id', 'analytics1');
+        
+        const configScript = document.createElement('script');
+        configScript.setAttribute('type', 'application/json');
+        configScript.textContent = JSON.stringify({
+          vars: {
+            account: analytics.googleAnalytics
+          },
+          triggers: {
+            trackPageview: {
+              on: 'visible',
+              request: 'pageview'
+            }
+          }
+        });
+        
+        ampAnalytics.appendChild(configScript);
+        document.body.appendChild(ampAnalytics);
+      }
     }
 
     // Set AMP HTML attribute
@@ -62,27 +86,7 @@ export const AMP = ({ enabled = false, analytics }: AMPProps) => {
 
   if (!enabled) return null;
 
-  return (
-    <>
-      {analytics?.googleAnalytics && (
-        <amp-analytics type="googleanalytics" id="analytics1">
-          <script type="application/json" dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              vars: {
-                account: analytics.googleAnalytics
-              },
-              triggers: {
-                trackPageview: {
-                  on: 'visible',
-                  request: 'pageview'
-                }
-              }
-            })
-          }} />
-        </amp-analytics>
-      )}
-    </>
-  );
+  return null;
 };
 
 export const useAMP = () => {
