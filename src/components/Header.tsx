@@ -23,6 +23,15 @@ export const Header = () => {
     i18n.changeLanguage(newLang);
   };
 
+  const navItems = [
+    { label: t('allIndiaGovtJobs'), href: '/' },
+    { label: t('admitCard'), href: '/admit-card' },
+    { label: t('results'), href: '/results' },
+    { label: t('answerKey'), href: '/answer-key' },
+    { label: t('cutOff'), href: '/cut-off' },
+    { label: t('syllabus'), href: '/syllabus' }
+  ];
+
   return (
     <header className="bg-background border-b-brutal border-black sticky top-0 z-50 bg-white">
       <div className="container mx-auto px-4">
