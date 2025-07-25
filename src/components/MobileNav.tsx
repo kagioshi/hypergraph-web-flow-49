@@ -28,43 +28,56 @@ export const MobileNav = () => {
   ];
 
   return (
-    <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-background border-t border-brutal">
-      <div className="grid grid-cols-4 gap-1 p-2">
+    <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t-brutal border-black">
+      <div className="grid grid-cols-4 gap-2 p-3">
         {navItems.slice(0, 3).map((item, index) => (
-          <Button
-            key={index}
-            variant="ghost"
-            size="sm"
-            className="flex flex-col gap-1 h-auto py-2 px-1"
-          >
-            <item.icon className="h-4 w-4" />
-            <span className="text-xs font-bold truncate">{item.label}</span>
-          </Button>
+          <div key={index} className={`bg-brutal-accent border-brutal shadow-card transform ${index % 2 === 0 ? 'rotate-1' : '-rotate-1'}`}>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="flex flex-col gap-1 h-auto py-3 px-2 w-full bg-transparent border-none shadow-none"
+            >
+              <div className="bg-white border-brutal shadow-card p-1 mb-1">
+                <item.icon className="h-4 w-4 text-black" />
+              </div>
+              <span className="text-xs font-black truncate uppercase text-black">{item.label}</span>
+            </Button>
+          </div>
         ))}
         
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild>
-            <Button
-              variant="ghost"
-              size="sm"
-              className="flex flex-col gap-1 h-auto py-2 px-1"
-            >
-              <Menu className="h-4 w-4" />
-              <span className="text-xs font-bold">More</span>
-            </Button>
+            <div className="bg-brutal-primary border-brutal shadow-card transform rotate-1">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="flex flex-col gap-1 h-auto py-3 px-2 w-full bg-transparent border-none shadow-none"
+              >
+                <div className="bg-white border-brutal shadow-card p-1 mb-1">
+                  <Menu className="h-4 w-4 text-black" />
+                </div>
+                <span className="text-xs font-black uppercase text-black">MORE</span>
+              </Button>
+            </div>
           </SheetTrigger>
-          <SheetContent side="bottom" className="h-80">
-            <div className="grid grid-cols-2 gap-4 pt-6">
+          <SheetContent side="bottom" className="h-80 bg-white border-t-brutal border-black">
+            <div className="bg-brutal-secondary border-brutal shadow-card p-4 mb-6 transform -rotate-1">
+              <h3 className="text-lg font-black uppercase text-black text-center tracking-wider">QUICK MENU</h3>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
               {navItems.map((item, index) => (
-                <Button
-                  key={index}
-                  variant="outline"
-                  className="flex items-center gap-3 h-12 justify-start"
-                  onClick={() => setIsOpen(false)}
-                >
-                  <item.icon className="h-5 w-5" />
-                  <span className="font-bold">{item.label}</span>
-                </Button>
+                <div key={index} className={`bg-brutal-accent border-brutal shadow-card transform ${index % 2 === 0 ? 'rotate-1' : '-rotate-1'}`}>
+                  <Button
+                    variant="ghost"
+                    className="flex items-center gap-3 h-12 justify-start w-full bg-transparent border-none shadow-none"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <div className="bg-white border-brutal shadow-card p-2">
+                      <item.icon className="h-4 w-4 text-black" />
+                    </div>
+                    <span className="font-black uppercase text-black text-xs">{item.label}</span>
+                  </Button>
+                </div>
               ))}
             </div>
           </SheetContent>

@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { Header } from "@/components/Header";
 import { JobSidebar } from "@/components/JobSidebar";
 import { JobFooter } from "@/components/JobFooter";
+import { MobileNav } from "@/components/MobileNav";
 import { AdSpace } from "@/components/AdSpace";
 import { AMP } from "@/components/AMP";
 import { Button } from "@/components/ui/button";
@@ -18,37 +19,79 @@ const Index = () => {
   
   const latestJobs = [
     {
-      title: "Senior React Developer",
-      company: "TechCorp",
-      location: "San Francisco, CA",
-      salary: "$120K - $180K",
-      type: "Full-time",
-      tags: ["React", "TypeScript", "Remote"],
-      description: "Build scalable web applications using React and TypeScript",
+      title: "SSC CHSL 2024 - Combined Higher Secondary Level Examination",
+      company: "Staff Selection Commission",
+      location: "All India",
+      salary: "₹19,900 - ₹63,200",
+      type: "Permanent",
+      tags: ["SSC", "CHSL", "12th Pass", "All India"],
+      description: "Recruitment for LDC, JSA, PA, SA, DEO and Court Clerk posts",
       datePosted: new Date().toISOString(),
-      employmentType: "FULL_TIME"
+      employmentType: "FULL_TIME",
+      applicationDeadline: "2024-12-30",
+      ageLimit: "18-27 years",
+      fee: "₹100 (Gen/OBC), ₹0 (SC/ST/PH)",
+      department: "SSC"
     },
     {
-      title: "Product Manager",
-      company: "StartupXYZ",
-      location: "New York, NY", 
-      salary: "$100K - $150K",
-      type: "Full-time",
-      tags: ["Product", "Strategy", "Agile"],
-      description: "Lead product strategy and development for innovative solutions",
+      title: "UPSC Civil Services Examination 2024 (Prelims)",
+      company: "Union Public Service Commission",
+      location: "All India", 
+      salary: "₹56,100 - ₹2,50,000",
+      type: "Permanent",
+      tags: ["UPSC", "IAS", "IPS", "IFS", "Graduate"],
+      description: "Recruitment for IAS, IPS, IFS and other Group A & Group B Services",
       datePosted: new Date().toISOString(),
-      employmentType: "FULL_TIME"
+      employmentType: "FULL_TIME",
+      applicationDeadline: "2024-12-15",
+      ageLimit: "21-32 years",
+      fee: "₹200 (Gen/OBC), ₹0 (SC/ST/PH)",
+      department: "UPSC"
     },
     {
-      title: "UX Designer",
-      company: "DesignStudio",
-      location: "Remote",
-      salary: "$80K - $120K",
-      type: "Contract",
-      tags: ["Figma", "User Research", "Prototyping"],
-      description: "Create intuitive user experiences and design systems",
+      title: "Railway Recruitment Board - Junior Engineer (JE) 2024",
+      company: "Railway Recruitment Board",
+      location: "All India",
+      salary: "₹35,400 - ₹1,12,400",
+      type: "Permanent",
+      tags: ["Railway", "JE", "Diploma", "Technical"],
+      description: "Recruitment for Junior Engineer posts in various departments",
       datePosted: new Date().toISOString(),
-      employmentType: "CONTRACTOR"
+      employmentType: "FULL_TIME",
+      applicationDeadline: "2024-12-20",
+      ageLimit: "18-33 years",
+      fee: "₹500 (Gen/OBC), ₹250 (SC/ST)",
+      department: "Railway"
+    },
+    {
+      title: "IBPS PO XIV Recruitment 2024 - Probationary Officer",
+      company: "Institute of Banking Personnel Selection",
+      location: "Pan India",
+      salary: "₹23,700 - ₹42,020",
+      type: "Permanent",
+      tags: ["Banking", "PO", "Graduate", "IBPS"],
+      description: "Recruitment for Probationary Officer posts in Public Sector Banks",
+      datePosted: new Date().toISOString(),
+      employmentType: "FULL_TIME",
+      applicationDeadline: "2024-12-10",
+      ageLimit: "20-30 years",
+      fee: "₹850 (Gen/OBC), ₹175 (SC/ST/PH)",
+      department: "Banking"
+    },
+    {
+      title: "Indian Army Agniveer Recruitment Rally 2024",
+      company: "Indian Army",
+      location: "Multiple States",
+      salary: "₹30,000 - ₹40,000",
+      type: "Contract (4 years)",
+      tags: ["Army", "Agniveer", "10th/12th", "Physical"],
+      description: "Recruitment for Agniveer (General Duty) in Indian Army",
+      datePosted: new Date().toISOString(),
+      employmentType: "CONTRACT",
+      applicationDeadline: "2024-11-30",
+      ageLimit: "17.5-21 years",
+      fee: "₹0 (No Fee)",
+      department: "Defense"
     }
   ];
 
@@ -75,12 +118,14 @@ const Index = () => {
   ];
 
   const categories = [
-    { name: t('technology'), count: "2.5K", icon: Laptop, color: "text-black" },
-    { name: t('healthcare'), count: "1.1K", icon: Heart, color: "text-black" },
-    { name: t('finance'), count: "900", icon: TrendingUp, color: "text-black" },
-    { name: t('education'), count: "800", icon: GraduationCap, color: "text-black" },
-    { name: t('marketing'), count: "1.2K", icon: Megaphone, color: "text-black" },
-    { name: t('design'), count: "600", icon: Palette, color: "text-black" }
+    { name: "SSC Jobs", count: "2.5K", icon: Briefcase, color: "text-black" },
+    { name: "UPSC Jobs", count: "850", icon: GraduationCap, color: "text-black" },
+    { name: "Railway Jobs", count: "1.8K", icon: TrendingUp, color: "text-black" },
+    { name: "Banking Jobs", count: "1.2K", icon: Building2, color: "text-black" },
+    { name: "Defense Jobs", count: "950", icon: Star, color: "text-black" },
+    { name: "State PSC", count: "3.1K", icon: Users, color: "text-black" },
+    { name: "Police Jobs", count: "750", icon: Heart, color: "text-black" },
+    { name: "Teaching Jobs", count: "1.4K", icon: GraduationCap, color: "text-black" }
   ];
 
   return (
@@ -162,19 +207,12 @@ const Index = () => {
                   <div className="relative flex-1">
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-black h-5 w-5" />
                     <Input 
-                      placeholder={t('searchPlaceholder').toUpperCase()}
-                      className="pl-10 h-14 text-black font-black uppercase"
-                    />
-                  </div>
-                  <div className="relative flex-1">
-                    <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 text-black h-5 w-5" />
-                    <Input 
-                      placeholder={t('locationPlaceholder').toUpperCase()}
+                      placeholder="SEARCH GOVERNMENT JOBS, EXAMS, RESULTS..."
                       className="pl-10 h-14 text-black font-black uppercase"
                     />
                   </div>
                   <Button size="lg" className="h-14 px-8 bg-brutal-secondary text-black" variant="brutal">
-                    {t('searchJobs').toUpperCase()}
+                    SEARCH JOBS
                   </Button>
                 </div>
               </div>
@@ -235,7 +273,7 @@ const Index = () => {
                   </h2>
                 </div>
                 
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                   {categories.map((category, index) => (
                     <Card key={category.name} className={`card-brutal cursor-pointer bg-brutal-accent transform ${index % 3 === 0 ? 'rotate-2' : index % 3 === 1 ? '-rotate-1' : 'rotate-1'} hover:shadow-hover transition-none`}>
                       <CardContent className="p-6 text-center">
@@ -297,9 +335,33 @@ const Index = () => {
                           {job.location}
                         </div>
                         
-                        <div className="bg-brutal-accent border-brutal shadow-card p-3 mb-4 inline-block">
-                          <div className="text-lg font-black text-black uppercase">
-                            {job.salary}
+                        <div className="grid grid-cols-2 gap-3 mb-4">
+                          <div className="bg-brutal-accent border-brutal shadow-card p-3">
+                            <div className="text-xs font-black text-black uppercase mb-1">Salary</div>
+                            <div className="text-sm font-black text-black">
+                              {job.salary}
+                            </div>
+                          </div>
+                          <div className="bg-brutal-primary border-brutal shadow-card p-3">
+                            <div className="text-xs font-black text-black uppercase mb-1">Deadline</div>
+                            <div className="text-sm font-black text-black">
+                              {job.applicationDeadline}
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div className="grid grid-cols-2 gap-3 mb-4">
+                          <div className="bg-brutal-secondary border-brutal shadow-card p-3">
+                            <div className="text-xs font-black text-black uppercase mb-1">Age Limit</div>
+                            <div className="text-sm font-black text-black">
+                              {job.ageLimit}
+                            </div>
+                          </div>
+                          <div className="bg-white border-brutal shadow-card p-3">
+                            <div className="text-xs font-black text-black uppercase mb-1">Fee</div>
+                            <div className="text-sm font-black text-black">
+                              {job.fee}
+                            </div>
                           </div>
                         </div>
                         
@@ -335,6 +397,7 @@ const Index = () => {
         <AdSpace variant="sticky" title="BOTTOM AD" />
 
         <JobFooter />
+        <MobileNav />
       </div>
     </>
   );
