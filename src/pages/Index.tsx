@@ -13,12 +13,14 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Search, MapPin, Briefcase, Users, TrendingUp, Star, Laptop, Heart, Building2, GraduationCap, Megaphone, Palette } from "lucide-react";
+import { JobCard } from "@/components/JobCard";
 
 const Index = () => {
   const { t } = useTranslation();
   
   const latestJobs = [
     {
+      id: "ssc-chsl-2024",
       title: "SSC CHSL 2024 - Combined Higher Secondary Level Examination",
       company: "Staff Selection Commission",
       location: "All India",
@@ -34,6 +36,7 @@ const Index = () => {
       department: "SSC"
     },
     {
+      id: "upsc-cse-2024",
       title: "UPSC Civil Services Examination 2024 (Prelims)",
       company: "Union Public Service Commission",
       location: "All India", 
@@ -49,6 +52,7 @@ const Index = () => {
       department: "UPSC"
     },
     {
+      id: "rrb-je-2024",
       title: "Railway Recruitment Board - Junior Engineer (JE) 2024",
       company: "Railway Recruitment Board",
       location: "All India",
@@ -64,6 +68,7 @@ const Index = () => {
       department: "Railway"
     },
     {
+      id: "ibps-po-2024",
       title: "IBPS PO XIV Recruitment 2024 - Probationary Officer",
       company: "Institute of Banking Personnel Selection",
       location: "Pan India",
@@ -79,6 +84,7 @@ const Index = () => {
       department: "Banking"
     },
     {
+      id: "army-agniveer-2024",
       title: "Indian Army Agniveer Recruitment Rally 2024",
       company: "Indian Army",
       location: "Multiple States",
@@ -158,7 +164,7 @@ const Index = () => {
 
       <AMP enabled={isMobile} analytics={{ googleAnalytics: 'GA_TRACKING_ID' }} />
 
-      <div className="min-h-screen bg-background">
+      <div className={`min-h-screen bg-background ${isMobile ? 'pb-20' : ''}`}>
         <Header />
         
         {/* Top Banner Ad */}
@@ -201,19 +207,21 @@ const Index = () => {
                 </p>
               </div>
               
-              {/* Search Bar - Brutal Style */}
+              {/* Search Bar - Brutal Style (No Location) */}
               <div className="bg-white border-brutal shadow-hover p-6 transform -rotate-1">
                 <div className="flex flex-col md:flex-row gap-4">
                   <div className="relative flex-1">
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-black h-5 w-5" />
                     <Input 
                       placeholder="SEARCH GOVERNMENT JOBS, EXAMS, RESULTS..."
-                      className="pl-10 h-14 text-black font-black uppercase"
+                      className="pl-10 h-14 text-black font-black uppercase border-brutal"
                     />
                   </div>
-                  <Button size="lg" className="h-14 px-8 bg-brutal-secondary text-black" variant="brutal">
-                    SEARCH JOBS
-                  </Button>
+                  <div className="bg-brutal-secondary border-brutal shadow-card transform rotate-1">
+                    <Button size="lg" className="h-14 px-8 bg-transparent border-none shadow-none text-black font-black uppercase">
+                      SEARCH JOBS
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -314,70 +322,7 @@ const Index = () => {
                 
                 <div className="grid gap-8">
                   {latestJobs.map((job, index) => (
-                    <Card key={index} className={`card-brutal bg-white transform ${index % 2 === 0 ? 'rotate-1' : '-rotate-1'}`}>
-                      <CardContent className="p-6">
-                        <div className="flex justify-between items-start mb-4">
-                          <Badge variant="outline" className="bg-brutal-secondary text-black border-brutal font-black uppercase text-xs">
-                            {job.type}
-                          </Badge>
-                          <div className="bg-brutal-accent border-brutal shadow-card p-2">
-                            <Star className="h-5 w-5 text-black" />
-                          </div>
-                        </div>
-                        
-                        <div className="bg-brutal-primary border-brutal shadow-card p-4 mb-4 transform rotate-1">
-                          <h3 className="font-black text-lg uppercase tracking-wide text-black">{job.title}</h3>
-                        </div>
-                        
-                        <p className="text-black mb-2 font-black uppercase text-sm">{job.company}</p>
-                        <div className="flex items-center text-sm text-black mb-3 font-black uppercase">
-                          <MapPin className="h-4 w-4 mr-1" />
-                          {job.location}
-                        </div>
-                        
-                        <div className="grid grid-cols-2 gap-3 mb-4">
-                          <div className="bg-brutal-accent border-brutal shadow-card p-3">
-                            <div className="text-xs font-black text-black uppercase mb-1">Salary</div>
-                            <div className="text-sm font-black text-black">
-                              {job.salary}
-                            </div>
-                          </div>
-                          <div className="bg-brutal-primary border-brutal shadow-card p-3">
-                            <div className="text-xs font-black text-black uppercase mb-1">Deadline</div>
-                            <div className="text-sm font-black text-black">
-                              {job.applicationDeadline}
-                            </div>
-                          </div>
-                        </div>
-                        
-                        <div className="grid grid-cols-2 gap-3 mb-4">
-                          <div className="bg-brutal-secondary border-brutal shadow-card p-3">
-                            <div className="text-xs font-black text-black uppercase mb-1">Age Limit</div>
-                            <div className="text-sm font-black text-black">
-                              {job.ageLimit}
-                            </div>
-                          </div>
-                          <div className="bg-white border-brutal shadow-card p-3">
-                            <div className="text-xs font-black text-black uppercase mb-1">Fee</div>
-                            <div className="text-sm font-black text-black">
-                              {job.fee}
-                            </div>
-                          </div>
-                        </div>
-                        
-                        <div className="flex flex-wrap gap-2 mb-4">
-                          {job.tags.map(tag => (
-                            <Badge key={tag} variant="secondary" className="text-xs bg-white border-brutal font-black uppercase text-black">
-                              {tag}
-                            </Badge>
-                          ))}
-                        </div>
-                        
-                        <Button className="w-full bg-brutal-primary text-black" variant="brutal">
-                          APPLY NOW
-                        </Button>
-                      </CardContent>
-                    </Card>
+                    <JobCard key={index} job={job} index={index} />
                   ))}
                 </div>
                 
@@ -397,7 +342,9 @@ const Index = () => {
         <AdSpace variant="sticky" title="BOTTOM AD" />
 
         <JobFooter />
-        <MobileNav />
+        
+        {/* Mobile Navigation Footer */}
+        {isMobile && <MobileNav />}
       </div>
     </>
   );
