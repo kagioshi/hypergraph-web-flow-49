@@ -150,13 +150,3 @@ export const useThirdPartyScripts = () => {
     initializeThirdPartyServices
   };
 };
-
-// Extend window object for TypeScript
-declare global {
-  interface Window {
-    dataLayer: any[];
-    gtag: (...args: any[]) => void;
-    fbq: (...args: any[]) => void;
-    hj: (...args: any[]) => void;
-  }
-}

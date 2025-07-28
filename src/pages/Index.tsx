@@ -13,6 +13,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Search, MapPin, Briefcase, Users, TrendingUp, Star, Laptop, Heart, Building2, GraduationCap, Megaphone, Palette } from "lucide-react";
+import { InfiniteJobList } from "@/components/InfiniteJobList";
+import { JobAlertForm } from "@/components/JobAlertForm";
+import { RelatedJobs } from "@/components/RelatedJobs";
+import { useJobAlerts } from "@/hooks/useJobAlerts";
+import { useAnalytics } from "@/hooks/useAnalytics";
 import { JobCard } from "@/components/JobCard";
 
 const Index = () => {

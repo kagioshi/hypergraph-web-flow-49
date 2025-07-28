@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { useJobBookmarks } from '@/hooks/useJobBookmarks';
+import { useAnalytics } from '@/hooks/useAnalytics';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Bookmark, MapPin, Calendar, Users, IndianRupee, Clock, ExternalLink } from 'lucide-react';
+import { Bookmark, MapPin, Calendar, Users, IndianRupee, Clock, ExternalLink, Share2 } from 'lucide-react';
+import { JobShare } from '@/components/JobShare';
 import { useToast } from '@/hooks/use-toast';
 
 interface JobCardProps {
@@ -28,10 +30,14 @@ interface JobCardProps {
 
 export const JobCard = ({ job, index }: JobCardProps) => {
   const { addBookmark, removeBookmark, isBookmarked } = useJobBookmarks();
+  const { trackJobView, trackJobBookmark } = useAnalytics();
   const { toast } = useToast();
   const [isHovered, setIsHovered] = useState(false);
+  const [showDetails, setShowDetails] = useState(false);
 
   const handleBookmark = () => {
+    const action = isBookmarked(job.id) ? 'remove' : 'add';
+    
     if (isBookmarked(job.id)) {
       removeBookmark(job.id);
       toast({
@@ -43,6 +49,21 @@ export const JobCard = ({ job, index }: JobCardProps) => {
       toast({
         title: "Job Bookmarked",
         description: "Job added to your bookmarks",
+      });
+    }
+    
+    trackJobBookmark(job.id, action);
+  };
+
+  const handleViewDetails = () => {
+    setShowDetails(!showDetails);
+    if (!showDetails) {
+      trackJobView({
+        job_id: job.id,
+        job_title: job.title,
+        job_company: job.company,
+        job_department: job.department,
+        job_location: job.location,
       });
     }
   };
@@ -157,24 +178,38 @@ export const JobCard = ({ job, index }: JobCardProps) => {
         </div>
 
         {/* Action Buttons */}
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-3 gap-2">
           <div className="bg-brutal-primary border-brutal shadow-card hover:shadow-hover transition-none transform rotate-1">
             <Button 
-              className="w-full bg-transparent border-none shadow-none font-black uppercase text-white py-3"
+              className="w-full bg-transparent border-none shadow-none font-black uppercase text-white py-3 text-xs"
             >
-              <ExternalLink className="h-4 w-4 mr-2" />
-              APPLY NOW
+              <ExternalLink className="h-4 w-4 mr-1" />
+              APPLY
             </Button>
           </div>
           <div className="bg-white border-brutal shadow-card hover:shadow-hover transition-none transform -rotate-1">
             <Button 
               variant="outline"
-              className="w-full bg-transparent border-none shadow-none font-black uppercase text-black py-3"
+              onClick={handleViewDetails}
+              className="w-full bg-transparent border-none shadow-none font-black uppercase text-black py-3 text-xs"
             >
-              VIEW DETAILS
+              {showDetails ? 'HIDE' : 'DETAILS'}
             </Button>
           </div>
+          <div className="bg-brutal-accent border-brutal shadow-card hover:shadow-hover transition-none">
+            <JobShare job={job} className="w-full bg-transparent border-none shadow-none font-black text-black py-3" />
+          </div>
         </div>
+
+        {/* Details Section */}
+        {showDetails && (
+          <div className="mt-4 bg-white border-brutal shadow-card p-4 transform rotate-1">
+            <p className="text-sm font-black text-black uppercase mb-2">Description:</p>
+            <p className="text-sm text-black">{job.description}</p>
+            <p className="text-xs font-black text-black uppercase mt-2">Department: {job.department}</p>
+            <p className="text-xs font-black text-black uppercase">Posted: {job.datePosted}</p>
+          </div>
+        )}
       </CardContent>
     </Card>
   );
