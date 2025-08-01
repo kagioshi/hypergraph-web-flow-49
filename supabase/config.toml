@@ -1,1 +1,4 @@
 project_id = "iufuerdjyhnipraaabvh"
+
+[functions.create-hygraph-schema]
+verify_jwt = false
