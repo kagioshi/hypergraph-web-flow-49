@@ -19,6 +19,8 @@ import { RelatedJobs } from "@/components/RelatedJobs";
 import { useJobAlerts } from "@/hooks/useJobAlerts";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { JobCard } from "@/components/JobCard";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 const Index = () => {
   const { t } = useTranslation();
@@ -139,6 +141,34 @@ const Index = () => {
     { name: "Teaching Jobs", count: "1.4K", icon: GraduationCap, color: "text-black" }
   ];
 
+  const executeHygraphSchema = async () => {
+    try {
+      toast("Creating Hygraph schemas...", {
+        description: "This may take a few moments"
+      });
+      
+      const { data, error } = await supabase.functions.invoke('create-hygraph-schema');
+      
+      if (error) {
+        console.error('Function error:', error);
+        toast.error("Failed to create schemas", {
+          description: error.message
+        });
+        return;
+      }
+      
+      console.log('Schema creation result:', data);
+      toast.success("Hygraph schemas created successfully!", {
+        description: "All content models are now available in your Hygraph CMS"
+      });
+    } catch (err) {
+      console.error('Error executing schema creation:', err);
+      toast.error("Error executing schema creation", {
+        description: "Check console for details"
+      });
+    }
+  };
+
   return (
     <>
       <SEOHelmet>
@@ -225,6 +255,15 @@ const Index = () => {
                   <div className="bg-brutal-secondary border-brutal shadow-card transform rotate-1">
                     <Button size="lg" className="h-14 px-8 bg-transparent border-none shadow-none text-black font-black uppercase">
                       SEARCH JOBS
+                    </Button>
+                  </div>
+                  <div className="bg-brutal-accent border-brutal shadow-card transform -rotate-1">
+                    <Button 
+                      onClick={executeHygraphSchema}
+                      size="lg" 
+                      className="h-14 px-8 bg-transparent border-none shadow-none text-black font-black uppercase"
+                    >
+                      CREATE CMS
                     </Button>
                   </div>
                 </div>
