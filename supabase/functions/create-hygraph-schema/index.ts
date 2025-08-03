@@ -12,13 +12,32 @@ serve(async (req) => {
   }
 
   try {
-    const hygraphSecret = Deno.env.get('Hygraph_endoint_secret');
+    console.log('Starting Hygraph schema creation...');
+    
+    const hygraphSecret = Deno.env.get('Hygraph_endpoint_secret');
     if (!hygraphSecret) {
-      throw new Error('Hygraph secret not found');
+      console.error('Hygraph_endpoint_secret environment variable not found');
+      throw new Error('Hygraph credentials not configured. Please add the Hygraph_endpoint_secret in Supabase secrets.');
     }
 
+    console.log('Hygraph secret found, parsing credentials...');
+    
     // Parse the secret to get endpoint and token
-    const { endpoint, token } = JSON.parse(hygraphSecret);
+    let endpoint, token;
+    try {
+      const parsed = JSON.parse(hygraphSecret);
+      endpoint = parsed.endpoint;
+      token = parsed.token;
+      
+      if (!endpoint || !token) {
+        throw new Error('Invalid secret format: missing endpoint or token');
+      }
+      
+      console.log('Credentials parsed successfully');
+    } catch (parseError) {
+      console.error('Error parsing Hygraph secret:', parseError);
+      throw new Error('Invalid Hygraph secret format. Expected JSON with "endpoint" and "token" fields.');
+    }
 
     // Content model definitions
     const contentModels = [
