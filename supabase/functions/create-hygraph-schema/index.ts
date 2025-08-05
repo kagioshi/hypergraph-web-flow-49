@@ -34,6 +34,37 @@ serve(async (req) => {
       }
       
       console.log('Credentials parsed successfully');
+      console.log('Testing connection to Hygraph...');
+      
+      // Test connection with a simple query
+      const testQuery = `
+        query {
+          __schema {
+            queryType {
+              name
+            }
+          }
+        }
+      `;
+      
+      const testResponse = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({ query: testQuery }),
+      });
+      
+      console.log('Test response status:', testResponse.status);
+      const testResult = await testResponse.json();
+      
+      if (!testResponse.ok || testResult.errors) {
+        console.error('Connection test failed:', testResult);
+        throw new Error(`Failed to connect to Hygraph Management API: ${JSON.stringify(testResult)}`);
+      }
+      
+      console.log('Connection test successful');
     } catch (parseError) {
       console.error('Error parsing Hygraph secret:', parseError);
       throw new Error('Invalid Hygraph secret format. Expected JSON with "endpoint" and "token" fields.');
@@ -161,24 +192,59 @@ serve(async (req) => {
 
       // Add fields to the model
       for (const field of model.fields) {
-        const fieldMutation = `
-          mutation {
-            createSimpleField(data: {
-              modelId: "${modelId}"
-              apiId: "${field.apiId}"
-              displayName: "${field.displayName}"
-              type: ${field.type}
-              ${field.isRequired ? 'isRequired: true' : ''}
-              ${field.isUnique ? 'isUnique: true' : ''}
-              ${field.defaultValue ? `defaultValue: ${JSON.stringify(field.defaultValue)}` : ''}
-              ${field.enumValues ? `enumValues: ${JSON.stringify(field.enumValues)}` : ''}
-            }) {
-              id
-              apiId
-              displayName
+        console.log(`Creating field ${field.apiId} of type ${field.type} for model ${model.name}`);
+        
+        let fieldMutation;
+        
+        if (field.type === 'ENUMERATION') {
+          // Handle enumeration fields with createEnumerableField
+          fieldMutation = `
+            mutation {
+              createEnumerableField(data: {
+                modelId: "${modelId}"
+                apiId: "${field.apiId}"
+                displayName: "${field.displayName}"
+                enumerations: [${field.enumValues.map(val => `"${val}"`).join(', ')}]
+                ${field.isRequired ? 'isRequired: true' : ''}
+              }) {
+                id
+                apiId
+                displayName
+              }
             }
-          }
-        `;
+          `;
+        } else {
+          // Handle simple fields
+          const fieldData = {
+            modelId: modelId,
+            apiId: field.apiId,
+            displayName: field.displayName,
+            type: field.type
+          };
+          
+          // Add optional properties
+          if (field.isRequired) fieldData.isRequired = true;
+          if (field.isUnique) fieldData.isUnique = true;
+          if (field.defaultValue) fieldData.defaultValue = field.defaultValue;
+          
+          fieldMutation = `
+            mutation {
+              createSimpleField(data: {
+                modelId: "${modelId}"
+                apiId: "${field.apiId}"
+                displayName: "${field.displayName}"
+                type: ${field.type}
+                ${field.isRequired ? 'isRequired: true' : ''}
+                ${field.isUnique ? 'isUnique: true' : ''}
+                ${field.defaultValue ? `defaultValue: ${JSON.stringify(field.defaultValue)}` : ''}
+              }) {
+                id
+                apiId
+                displayName
+              }
+            }
+          `;
+        }
 
         const fieldResponse = await fetch(endpoint, {
           method: 'POST',
@@ -189,12 +255,14 @@ serve(async (req) => {
           body: JSON.stringify({ query: fieldMutation }),
         });
 
+        console.log(`Field ${field.apiId} response status:`, fieldResponse.status);
         const fieldResult = await fieldResponse.json();
         
         if (fieldResult.errors) {
-          console.error(`Error creating field ${field.apiId} for model ${model.name}:`, fieldResult.errors);
+          console.error(`Error creating field ${field.apiId} for model ${model.name}:`, JSON.stringify(fieldResult.errors, null, 2));
+          console.error('Field mutation that failed:', fieldMutation);
         } else {
-          console.log(`Created field ${field.apiId} for model ${model.name}`);
+          console.log(`Successfully created field ${field.apiId} for model ${model.name}`);
         }
       }
 
