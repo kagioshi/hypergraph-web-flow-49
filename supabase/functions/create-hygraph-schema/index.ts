@@ -25,6 +25,12 @@ serve(async (req) => {
     // Parse the secret to get endpoint and token
     let endpoint, token;
     try {
+      // Check if the secret is a JWT token (starts with eyJ)
+      if (hygraphSecret.startsWith('eyJ')) {
+        console.error('Hygraph secret appears to be a JWT token, but we need JSON format');
+        throw new Error('Please provide Hygraph credentials as JSON with "endpoint" and "token" fields, not as a JWT token');
+      }
+      
       const parsed = JSON.parse(hygraphSecret);
       endpoint = parsed.endpoint;
       token = parsed.token;
@@ -80,7 +86,7 @@ serve(async (req) => {
           { apiId: "name", displayName: "Name", type: "STRING", isRequired: true },
           { apiId: "code", displayName: "Code", type: "STRING", isUnique: true },
           { apiId: "slug", displayName: "Slug", type: "STRING", isUnique: true },
-          { apiId: "isActive", displayName: "Is Active", type: "BOOLEAN", defaultValue: { Boolean: true } }
+          { apiId: "isActive", displayName: "Is Active", type: "BOOLEAN", defaultValue: true }
         ]
       },
       {
@@ -91,9 +97,9 @@ serve(async (req) => {
           { apiId: "name", displayName: "Name", type: "STRING", isRequired: true },
           { apiId: "fullName", displayName: "Full Name", type: "STRING" },
           { apiId: "slug", displayName: "Slug", type: "STRING", isUnique: true },
-          { apiId: "description", displayName: "Description", type: "RICHTEXT" },
+          { apiId: "description", displayName: "Description", type: "RTE" },
           { apiId: "officialWebsite", displayName: "Official Website", type: "STRING" },
-          { apiId: "isActive", displayName: "Is Active", type: "BOOLEAN", defaultValue: { Boolean: true } }
+          { apiId: "isActive", displayName: "Is Active", type: "BOOLEAN", defaultValue: true }
         ]
       },
       {
@@ -103,8 +109,8 @@ serve(async (req) => {
         fields: [
           { apiId: "name", displayName: "Name", type: "STRING", isRequired: true },
           { apiId: "slug", displayName: "Slug", type: "STRING", isUnique: true },
-          { apiId: "description", displayName: "Description", type: "RICHTEXT" },
-          { apiId: "isActive", displayName: "Is Active", type: "BOOLEAN", defaultValue: { Boolean: true } }
+          { apiId: "description", displayName: "Description", type: "RTE" },
+          { apiId: "isActive", displayName: "Is Active", type: "BOOLEAN", defaultValue: true }
         ]
       },
       {
@@ -117,7 +123,7 @@ serve(async (req) => {
           { apiId: "examDate", displayName: "Exam Date", type: "DATE" },
           { apiId: "resultDate", displayName: "Result Date", type: "DATE" },
           { apiId: "resultUrl", displayName: "Result URL", type: "STRING" },
-          { apiId: "description", displayName: "Description", type: "RICHTEXT" },
+          { apiId: "description", displayName: "Description", type: "RTE" },
           { apiId: "status", displayName: "Status", type: "ENUMERATION", enumValues: ["Draft", "Published", "Expired"] }
         ]
       },
@@ -132,7 +138,7 @@ serve(async (req) => {
           { apiId: "admitCardUrl", displayName: "Admit Card URL", type: "STRING" },
           { apiId: "downloadStartDate", displayName: "Download Start Date", type: "DATETIME" },
           { apiId: "downloadEndDate", displayName: "Download End Date", type: "DATETIME" },
-          { apiId: "instructions", displayName: "Instructions", type: "RICHTEXT" },
+          { apiId: "instructions", displayName: "Instructions", type: "RTE" },
           { apiId: "status", displayName: "Status", type: "ENUMERATION", enumValues: ["Draft", "Published", "Expired"] }
         ]
       },
@@ -143,10 +149,10 @@ serve(async (req) => {
         fields: [
           { apiId: "title", displayName: "Title", type: "STRING", isRequired: true },
           { apiId: "slug", displayName: "Slug", type: "STRING", isUnique: true },
-          { apiId: "subjects", displayName: "Subjects", type: "RICHTEXT" },
-          { apiId: "examPattern", displayName: "Exam Pattern", type: "RICHTEXT" },
+          { apiId: "subjects", displayName: "Subjects", type: "RTE" },
+          { apiId: "examPattern", displayName: "Exam Pattern", type: "RTE" },
           { apiId: "lastUpdated", displayName: "Last Updated", type: "DATETIME" },
-          { apiId: "isActive", displayName: "Is Active", type: "BOOLEAN", defaultValue: { Boolean: true } }
+          { apiId: "isActive", displayName: "Is Active", type: "BOOLEAN", defaultValue: true }
         ]
       }
     ];
